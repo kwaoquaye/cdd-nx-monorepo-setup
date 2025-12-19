@@ -1,0 +1,36 @@
+// import type { DefaultColorScheme } from '@mui/material/styles''
+import type {
+  ColorSystemOptions,
+  CssVarsThemeOptions,
+  Direction,
+  ThemeOptions as MuiThemeOptions,
+  Shadows,
+  SupportedColorScheme,
+} from '@mui/material/styles'
+
+
+// ----------------------------------------------------------------------
+
+/**
+ * Theme options
+ * Extended type that includes additional properties for color schemes and CSS variables.
+ *
+ * @see https://github.com/mui/material-ui/blob/master/packages/mui-material/src/styles/createTheme.ts
+ */
+
+export type ThemeColorScheme = SupportedColorScheme
+export type ThemeCssVariables = Pick<
+  CssVarsThemeOptions,
+  'colorSchemeSelector' | 'cssVarPrefix' | 'disableCssColorScheme' | 'shouldSkipGeneratingVar'
+>
+export type ThemeDirection = Direction
+
+export type ThemeOptions = Omit<MuiThemeOptions, 'components'> &
+  Pick<CssVarsThemeOptions, 'components' | 'defaultColorScheme'> & {
+    colorSchemes?: Record<ThemeColorScheme, ColorSchemeOptionsExtended>
+    cssVariables?: ThemeCssVariables
+  }
+
+type ColorSchemeOptionsExtended = ColorSystemOptions & {
+  shadows?: Shadows
+}
